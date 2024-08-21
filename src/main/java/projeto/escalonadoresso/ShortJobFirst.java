@@ -13,7 +13,7 @@ public class ShortJobFirst {
 
     
     private long mediaEspera,mediaExecucao,esperaTotal,execucaoTotal;
-    private Processo processoAnterior = null;
+    
     
     
     public void execute(LinkedList<Processo> processList) {
@@ -28,20 +28,19 @@ public class ShortJobFirst {
             
             System.out.println("id: "+processo.getId());
             
-            System.out.println("Tempo esperando até executar: "+getEsperaTotal());
+            System.out.println("Tempo esperando até executar: "+getEsperaTotal()+" ms");
 
             processo.run();
             
-            System.out.println("Tempo de turn around: "+(processo.getTempoExec()+getEsperaTotal()  ));
+            System.out.println("Tempo de turn around: "+(processo.getTempoExec()+getEsperaTotal()  )+" ms");
             
             System.out.println("tempo de execução: "+processo.getTempoExec()+" ms\n");
             
-            
             tempoExecucaoTotal(processo);
+            
             tempoEsperaTotal(processo);
             
             
-            this.processoAnterior = processo;
         }
         this.mediaEspera=(this.esperaTotal)/processList.size();
         this.mediaExecucao=(this.execucaoTotal)/processList.size();
@@ -49,7 +48,7 @@ public class ShortJobFirst {
         System.out.println("------------------------------------------------------------------------");
         
         
-        System.out.println("\nmedia de espera:"+this.getMediaEspera() + " s\ntempo medio de execução: "+this.getMediaExecucao()+" ms");
+        System.out.println("\nmedia de espera:"+this.getMediaEspera() + " ms\ntempo medio de execução: "+this.getMediaExecucao()+" ms");
     }
     
     public void tempoEsperaTotal(Processo processo){
