@@ -13,6 +13,7 @@ public class PriorityFirst {
 
     
     private long mediaEspera,mediaExecucao,esperaTotal,execucaoTotal;
+    private Processo processoAnterior = null;
 
     public void execute(LinkedList<Processo> processList) {
         
@@ -23,16 +24,28 @@ public class PriorityFirst {
         pipelineProcessos.ordenarLista(2);
         //listinha.remove();
         for(Processo processo:processList){//Entra na Linked list e passa do primeiro ao último objeto
+
+            System.out.println("id: "+processo.getId());
+            
+            if(this.processoAnterior != null){
+                System.out.println("Tempo esperando para executar: "+getEsperaTotal());
+                 
+            }
+            
             processo.run();
             tempoEsperaTotal(processo);
             tempoExecucaoTotal(processo);
             
-            System.out.println("\nid:"+processo.getId() + "\ntempo de execução: "+processo.getTempoExec()+" ms");
-            
+            System.out.println("tempo de execução: "+processo.getTempoExec()+" ms");
+            this.processoAnterior = processo;
         }
+
         this.mediaEspera=(this.esperaTotal)/processList.size();
         this.mediaExecucao=(this.execucaoTotal)/processList.size();
+        
+        System.out.println("------------------------------------------------------------------------");
         System.out.println("\nmedia de espera:"+this.getMediaEspera() + " s\ntempo medio de execução: "+this.getMediaExecucao()+" ms");
+
     }
     
     public void tempoEsperaTotal(Processo processo){
