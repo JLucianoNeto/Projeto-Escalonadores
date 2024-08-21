@@ -38,16 +38,16 @@ public class EscalonadoresSO {
         listinha.add(p9);
         listinha.add(p10);*/
         
-        //ShortJobFirst shortJF = new ShortJobFirst();
-        RoundRobin pipeRB = new RoundRobin();
+        ShortJobFirst shortJF = new ShortJobFirst();
+        //RoundRobin pipeRB = new RoundRobin();
         
         MedirUsos.printProcessorUsage();
         
         String usoMemoriaSJF = MedirUsos.printMemoryUsage();
         System.out.println("Uso de memoria antes do SJF = "+usoMemoriaSJF);
         
-        //shortJF.execute(listinha);
-        pipeRB.execute(listinha);
+        shortJF.execute(listinha);
+        //pipeRB.execute(listinha);
         
         String usoMemorialSJFFinal = MedirUsos.printMemoryUsage();
         System.out.println("\nUso de memoria depois do SJF= "+usoMemorialSJFFinal);

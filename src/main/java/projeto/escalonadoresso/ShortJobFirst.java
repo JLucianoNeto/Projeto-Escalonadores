@@ -23,21 +23,24 @@ public class ShortJobFirst {
         
         ListaDeProcessos pipelineProcessos = new ListaDeProcessos(processList);
         pipelineProcessos.ordenarLista(1);
-        //listinha.remove();
-        for(Processo processo:processList){//Entra na Linked list e passa do primeiro ao último objeto
+        
+        for(Processo processo:processList){
             
             System.out.println("id: "+processo.getId());
             
-            if(this.processoAnterior != null){
-                System.out.println("Tempo esperando até executar: "+getEsperaTotal());
-                 
-            }
-            
+            System.out.println("Tempo esperando até executar: "+getEsperaTotal());
+
             processo.run();
-            tempoEsperaTotal(processo);
-            tempoExecucaoTotal(processo);
+            
+            System.out.println("Tempo de turn around: "+(processo.getTempoExec()+getEsperaTotal()  ));
             
             System.out.println("tempo de execução: "+processo.getTempoExec()+" ms\n");
+            
+            
+            tempoExecucaoTotal(processo);
+            tempoEsperaTotal(processo);
+            
+            
             this.processoAnterior = processo;
         }
         this.mediaEspera=(this.esperaTotal)/processList.size();
@@ -50,7 +53,7 @@ public class ShortJobFirst {
     }
     
     public void tempoEsperaTotal(Processo processo){
-        this.esperaTotal = this.esperaTotal + processo.getTempo();
+        this.esperaTotal = this.esperaTotal + processo.getTempo()*1000;
         
     }
     public void tempoExecucaoTotal(Processo processo){
